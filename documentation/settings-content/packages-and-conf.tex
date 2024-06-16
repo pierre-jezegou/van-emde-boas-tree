@@ -1,0 +1,110 @@
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,snakes}
+\usepackage{epigraph} 
+\usepackage[left=2.5cm,
+            right=2.5cm,
+            top=2cm,
+            bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{epigraph}
+\usepackage{pdflscape}
+\usepackage{pgfplots}
+
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{background}
+\usepackage{url}
+\usepackage[pdfauthor={Pierre Jézégou},
+            pdftitle={ADS assignement},
+            pdfsubject={Word games},
+            pdfkeywords={}]{hyperref}
+\usepackage{wrapfig}
+
+\backgroundsetup{contents=\documentStatus, color=\watermarkColor}
+
+\usepackage{fancyhdr}
+\usepackage{textpos}
+\usepackage{sectsty}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%% Colors %%%%%%%%%%%%%%%
+\subsectionfont{\color{fib_red}}
+\subsubsectionfont{\color{fib_red}}
+\renewcommand\fbox{\fcolorbox{black}{fib_red!20}}
+
+\definecolor{fib_red}{RGB}{191,21,64}
+\definecolor{fib_gray}{RGB}{111,111,111}
+\definecolor{blue_upc}{RGB}{52,120,186}
+
+\usepackage{listings}
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{gray!10},
+  stringstyle=\color{green!50!black},
+  keywordstyle=\color{fib_red},
+  numberstyle=\tiny\color{fib_gray},
+  commentstyle=\color{blue_upc},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\usepackage[Bjornstrup]{fncychap}
+\newcommand{\watermarkColor}{red!10}
+
+
+\onehalfspacing
+
+
+\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
+\usepackage{xcolor,colortbl}
+
+\newtcolorbox{mybox}[1]{
+    arc=5pt,
+    boxrule=0pt,
+    colback=#1,
+    width=\linewidth,
+    halign=left,
+}
+
+\newenvironment{framed}[3]{
+    \vspace*{0.5em}
+    \begin{mybox}{#3!10}
+        \textbf{#1}:\hfill \textit{#2}\\
+        \hrule\vspace*{1em}
+}
+{\end{mybox}}
+
+\newenvironment{exercise_description}[1]{
+    \begin{framed}{Exercise description}{#1}{orange}
+}
+{\end{framed}}
+
+\newenvironment{summary}{
+    \begin{framed}{Summary}{Section \thesection}{blue}
+}
+{\end{framed}}
+
+
+\newcommand{\colorverb}[2]{\textcolor{#1}{\texttt{\detokenize{#2}}}}
+\newcommand{\type}[1]{\colorverb{green!50!black}{#1}}
+\newcommand{\code}[1]{\colorverb{green!50!black}{#1}}

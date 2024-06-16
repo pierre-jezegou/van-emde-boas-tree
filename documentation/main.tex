@@ -1,0 +1,45 @@
+\documentclass[10pt,a4paper,hidelinks]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\newcommand{\documentStatus}{DRAFT}
+
+
+\input{settings-content/packages-and-conf}
+
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault}
+
+
+\fancyfoot[R]{\raisebox{-0.5\baselineskip}{\includegraphics[scale=0.25]{images/logos/upc_logo.jpeg}}}
+
+\begin{document}
+\include{includes/000-cover_page}
+\tableofcontents
+
+% \section{Introduction}
+% \input{sections/introduction.tex}
+
+% \section{Implementation of Van Emde-Boas Trees}
+% \input{sections/veb_implementation.tex}
+
+% \section{Implementation of Binary Search Trees}
+% \input{sections/bst_implementation.tex}
+
+% \section{Cache Performance Measurement}
+% \input{sections/cache_performance.tex}
+
+% \section{Experimental Results}
+% \input{sections/results.tex}
+
+% \section{Observations}
+% \input{sections/observations.tex}
+
+\section{Appendix}
+\lstinputlisting[language=Python, caption=Van Emde-Boas Trees]{../van-emde-boas-tree.py}
+
+\newpage
+\listoffigures
+\lstlistoflistings
+\end{document}
