@@ -1,0 +1,62 @@
+name: 'Build LaTex Document'
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      #Checks-out the repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      #Enable cache
+      - uses: actions/cache@v3
+        name: Tectonic Cache
+        with:
+          path: ~/.cache/Tectonic
+          key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
+          restore-keys: |
+            ${{ runner.os }}-tectonic-
+      
+      # Setup tectonic
+      - name: Install Tectonic
+        uses: wtfjoke/setup-tectonic@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          tectonic-version: 0.14.1
+      
+      # Run tectonic to compile document
+      - name: Compile TeX file
+        run: tectonic documentation/main.tex
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF file
+          path: documentation/main.pdf
+          if-no-files-found: error
+          retention-days: 5
+
+      # Upload pdf file in GitHub release
+      - if: ${{ github.event_name == 'release'}}
+        name: Upload pdf to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: documentation/main.pdf
+          asset_name: Jézégou_Pierre-5-veb-tree.pdf
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+          body: "PDF compiled from source"
