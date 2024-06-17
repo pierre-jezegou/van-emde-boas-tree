@@ -1,0 +1,16 @@
+\newpage
+\section{Observations}
+
+Based on the experimental results, we observe the following:
+
+\begin{itemize}
+\item \textbf{Cache Misses Increase}: Contrary to expectations, the Van Emde-Boas tree consistently shows more cache misses compared to the binary search tree across all tested universe sizes.
+\item \textbf{Scalability Issue}: As the universe size increases, the difference in cache performance becomes more pronounced, but not in the expected way. The vEB trees exhibit worse scalability in terms of cache efficiency compared to BSTs.
+\item \textbf{Complexity without Benefit}: While vEB trees are indeed more complex to implement and manage, this complexity does not translate into better performance. In fact, BSTs outperform vEB trees in terms of cache efficiency, making them a preferable choice despite their simpler structure.
+\end{itemize}
+
+These findings contradict the hypothesis that Van Emde-Boas trees are more efficient in terms of cache usage. Instead, they indicate that binary search trees may offer better performance in practical scenarios due to their simpler and more effective memory access patterns.\\
+
+The ethics of scientific research demand unwavering rigor and integrity in conducting experiments and presenting results. It is crucial to respect the outcomes obtained, even if they do not confirm initial hypotheses or seem unconvincing. Attempting to redo the experiment solely to alter or manipulate the results to fit preconceived expectations is a severe violation of ethical principles.\\
+
+In analyzing the results of our experiments, several potential causes of error must be considered to understand why the expected outcomes were not achieved. Firstly, the implementation of the Van Emde-Boas (vEB) tree might have contained inefficiencies or bugs that increased the number of cache misses. This could stem from incorrect handling of memory allocations or suboptimal recursive function calls. Secondly, the experimental setup and measurement process might have introduced biases. For instance, variations in the hardware environment, even when controlled through Docker, could affect cache performance. Thirdly, the sample sizes and the specific input data used in the tests might not have been representative, leading to skewed results. Lastly, theoretical advantages of vEB trees might not translate into practical performance gains due to overheads not accounted for in theoretical models, such as those related to memory access patterns and cache line utilization. These factors collectively contribute to the discrepancy between the hypothesized and observed outcomes.

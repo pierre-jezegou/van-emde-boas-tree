@@ -18,27 +18,25 @@
 \include{includes/000-cover_page}
 \tableofcontents
 
-% \section{Introduction}
-% \input{sections/introduction.tex}
-
-% \section{Implementation of Van Emde-Boas Trees}
-% \input{sections/veb_implementation.tex}
-
-% \section{Implementation of Binary Search Trees}
-% \input{sections/bst_implementation.tex}
-
-% \section{Cache Performance Measurement}
-% \input{sections/cache_performance.tex}
-
-% \section{Experimental Results}
-% \input{sections/results.tex}
-
-% \section{Observations}
-% \input{sections/observations.tex}
+\input{sections/introduction.tex}
+\input{sections/veb_implementation.tex}
+\input{sections/bst_implementation.tex}
+\input{sections/cache_performance.tex}
+\input{sections/results.tex}
+\input{sections/observations.tex}
 
 \section{Appendix}
-\lstinputlisting[language=Python, caption=Van Emde-Boas Trees]{../van-emde-boas-tree.py}
+\subsection{Ven Emde-Boas Trees implementation}
+\label{appendix:veb}
+\lstinputlisting[language=Python, caption=Van Emde-Boas Trees]{../van_emde_boas_tree.py}
 
+\subsection{Binary Search Trees implementation}
+\label{appendix:bst}
+\lstinputlisting[language=Python, caption=Binary Search Trees]{../binary_search_tree.py}
+
+\subsection{Time performance plot}
+\label{appendix:time_performance_plot}
+\lstinputlisting[language=Python, caption=Time performance plot]{../performances.py}
 \newpage
 \listoffigures
 \lstlistoflistings

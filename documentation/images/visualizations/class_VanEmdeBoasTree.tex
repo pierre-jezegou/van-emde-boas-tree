@@ -1,0 +1,39 @@
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \node[draw, rounded corners=2mm, inner sep = 0.2cm, fill=orange!0] { 
+        \begin{tikzpicture} 
+            \node[inner sep = 1mm] (title) { \Large{\bfseries VanEmdeBoasTree }}; 
+            % \draw (title.south west) -- (title.south east);
+            \node[at=(title.south), anchor=north, inner sep=3mm, align=left, fill=green!30!black!10, yshift=-0.2cm] (attributes) {
+                \begin{minipage}{60mm}
+                    \textbf{Attributes}\\
+                    \small{0}: \verb|u|\\
+\small{1}: \verb|min|\\
+\small{2}: \verb|max|\\
+\small{3}: \verb|sqrt_u|\\
+\small{4}: \verb|children|\\
+\small{5}: \verb|aux|
+                \end{minipage} 
+                };
+            % \draw (attributes.north west) -- (attributes.north east);
+            \node[at=(attributes.south), anchor=north, inner sep=3mm, align=left, fill=blue!10, yshift=-0.2cm] (methods) {
+                \begin{minipage}{60mm}
+                    \textbf{Methods}\\
+                    \small{0}: \verb|delete|\\
+\small{1}: \verb|find_next|\\
+\small{2}: \verb|find_previous|\\
+\small{3}: \verb|high|\\
+\small{4}: \verb|index|\\
+\small{5}: \verb|insert|\\
+\small{6}: \verb|is_empty|\\
+\small{7}: \verb|low|
+                \end{minipage} 
+                };
+            % \draw (methods.north west) -- (methods.north east);
+        \end{tikzpicture}
+        }; 
+    \end{tikzpicture}
+    \caption{Class description - VanEmdeBoasTree }
+    \label{class:VanEmdeBoasTree}
+\end{figure}

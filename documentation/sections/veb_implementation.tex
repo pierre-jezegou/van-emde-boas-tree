@@ -1,0 +1,29 @@
+\section{Implementation of Van Emde-Boas Trees}
+
+A Van Emde-Boas tree is a special kind of data structure that helps manage sets of numbers. It works well for numbers within a specific range, making operations like insertion, deletion, and search very fast.
+
+\subsection{Structure}
+The Van Emde-Boas (vEB) tree is built like a hierarchy, splitting the range of numbers into smaller groups called clusters and summaries. Each node in the tree covers a range of numbers and points to its child clusters. This setup helps quickly narrow down the search area.
+
+At the top level, the range of numbers is divided into \(\sqrt{u}\) clusters, each handling a part of the total range. This division continues until we reach clusters of size 2. A summary structure keeps track of which clusters have numbers, making it easy to find and update values. Splitting the range into \(\sqrt{u}\) clusters is important because it keeps the tree balanced and ensures operations are done quickly, in \(O(\log \log u)\) time.
+
+\input{images/visualizations/class_VanEmdeBoasTree.tex}
+
+\subsection{Operations}
+Operations like insert, delete, and search use the hierarchical structure of the vEB tree to work efficiently. By breaking down the problem size at each level, the tree can quickly find or update values. This process ensures operations are done in \(O(\log \log u)\) time.
+
+When inserting a number, the tree finds the right cluster, updates the summary if needed, and then continues within that cluster. Deleting a number follows a similar process, making sure to update pointers and keep the tree structure. Searching benefits from the hierarchy by quickly locating the target number through the summary and clusters.
+
+\subsection{Implementation}
+The Van Emde-Boas tree is implemented in Python, reflecting its recursive nature. The class design breaks down the tree into manageable parts, with methods for each operation. This makes the code clear and easy to maintain.
+
+Key technical choices in the implementation include:
+\begin{itemize}
+    \item \textbf{Recursive Structure}: The vEB tree uses recursion to divide the range of numbers into clusters and summaries. This helps keep the tree balanced and operations efficient.
+    \item \textbf{Summary Structure}: The summary keeps track of non-empty clusters, allowing the tree to skip over empty spaces quickly. This makes operations faster.
+    \item \textbf{Base Case Handling}: For very small ranges (size 2), the tree handles operations directly without further splitting. This simplifies the code and ensures recursion stops correctly.
+\end{itemize}
+
+These choices help the Van Emde-Boas tree stay efficient and perform well in practical use.
+
+You can find the detailed implementation in Appendix \ref{appendix:veb}.

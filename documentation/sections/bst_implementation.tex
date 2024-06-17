@@ -1,0 +1,29 @@
+\section{Implementation of Plain Binary Search Trees}
+
+A plain Binary Search Tree (BST) is a simple and common data structure that supports dynamic sets of integers. It efficiently handles operations such as insertion, deletion, and search.
+
+\subsection{Structure}
+A Binary Search Tree is made up of nodes, where each node has up to two children. Each node contains a value, and the tree is organized such that for any given node, the values in its left subtree are less than its value, and the values in its right subtree are greater. This arrangement helps in maintaining a sorted order of elements.
+
+The BST is structured to ensure that operations can efficiently navigate through the tree by comparing values, which makes finding, inserting, or deleting a value straightforward.
+
+\input{images/visualizations/class_BinarySearchTree.tex}
+
+\subsection{Operations}
+Operations in a BST include insertion, deletion, and search, which rely on the tree's ordered structure. These operations typically have a time complexity of \(O(\log N)\) in a balanced tree, where \(N\) is the number of elements. However, in the worst case, such as when the tree becomes unbalanced and resembles a linked list, the complexity can degrade to \(O(N)\).
+
+To insert a value, the tree is traversed from the root to the appropriate leaf position following the binary search property. Deleting a value involves finding the node, then reorganizing the tree to maintain its properties. Searching for a value follows the path from the root, comparing values to navigate left or right until the value is found or a leaf is reached.
+
+\subsection{Implementation}
+The implementation of the Binary Search Tree in Python uses a class-based design. Each node is represented by an object, and the tree operations are methods within the class. This approach ensures the code is organized and maintainable.
+
+Key technical choices in the implementation include:
+\begin{itemize}
+    \item \textbf{Node Structure}: Each node has a value, and pointers to its left and right children. This simple structure supports the binary search property.
+    \item \textbf{Recursive and Iterative Methods}: The implementation may use both recursive and iterative methods for operations. Recursive methods are straightforward and easy to understand, while iterative methods can be more efficient in terms of memory usage.
+    \item \textbf{Balancing Mechanisms}: Although not implemented in a plain BST, there are techniques like rotations and balancing algorithms (e.g., AVL trees, Red-Black trees) to ensure the tree remains balanced for optimal performance.
+\end{itemize}
+
+These design choices ensure that the BST is easy to understand and implement while being efficient for common operations.
+
+You can find the detailed implementation in Appendix \ref{appendix:bst}.

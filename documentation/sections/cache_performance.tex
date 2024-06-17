@@ -1,0 +1,30 @@
+\section{Cache Performance Measurement}
+
+To evaluate the cache performance of Van Emde-Boas trees and binary search trees, we need a tool that can measure cache misses. For this purpose, we use Cachegrind, a cache profiler within the Valgrind tool suite. Cachegrind simulates how the program interacts with a machine's cache hierarchy, providing detailed information on cache hits and misses. Cachegrind can be installed on Unix-based systems via package managers.\\
+
+To test Valgrind I needed to set up a Linux environment (since I use MacOS). Initially, I considered setting up a virtual machine on AWS, but I finally decided to use a Docker container instead. This approach allowed me to create a controlled and isolated Linux environment on my local machine, ensuring accurate and reliable results during the testing phase.
+
+\subsection{Set up Valgrind in Docker}
+I created a Dockerfile to set up a container with Valgrind installed. The Dockerfile is as follows:
+\lstinputlisting[caption=Dockerfile to set up Valgrind environment]{../Dockerfile}
+Then, you just need to build the Docker image and run the container:
+\begin{lstlisting}
+docker build -t valgrind .
+docker run -it --rm valgrind
+\end{lstlisting}
+Note: All the code is automatically included in the Docker image, so you can run the tests directly in the container.
+
+\subsection{Run Cachegrind}
+To run the experiments, you have to modify (manually) the code to change the input size and the data structure to be tested. Then, you can run the following command to execute the program with Cachegrind:
+\begin{lstlisting}[language=bash]
+valgrind --tool=cachegrind --cachegrind-out-file=output-veb --trace-children=yes /usr/bin/python3 ./van_emde_boas_tree.py
+\end{lstlisting}
+
+\subsection{Interpreting Results}
+
+The output from Cachegrind includes detailed statistics on L1, L2, and L3 cache hits and misses. These statistics help in understanding the memory access patterns and efficiency of the data structures. To analyze the results, we can use the \code{cg_annotate} tool, which generates a human-readable report from the Cachegrind output file. The following command generates a report for the Van Emde-Boas tree implementation:
+\begin{lstlisting}[language=bash]
+cg_annotate output-veb
+\end{lstlisting}
+
+It produces a report like the one shown in Figure \ref{fig:cg_annotate_veb}. The report includes a summary of the cache misses and a detailed breakdown of the cache misses by function. This information helps in identifying the bottlenecks and areas for optimization in the code.

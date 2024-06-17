@@ -1,0 +1,200 @@
+\section{Experimental Results}
+
+To compare the cache performance of Van Emde-Boas trees and binary search trees, we conducted a series of experiments. We measured the number of cache misses for various sizes of the universe (B) and recorded the results.
+
+\subsection{Setup}
+
+The experiments were conducted on a machine with the following specifications:
+\begin{itemize}
+    \item Processor: M2 Mac (Apple Silicon)
+    \item RAM: 16GB
+    \item Cache: 16 KB 4-way set associative L1 instruction and data caches, 256 KB 8-way set associative L2 cache, all with 64-byte lines. (informations from \code{valgrind ... -v ...})
+\end{itemize}
+
+\subsection{Experimental Procedure}
+\begin{enumerate}
+    \item We implemented Van Emde-Boas trees and binary search trees in Python.
+    \item We used Valgrind's Cachegrind tool to measure the number of cache misses for each data structure.
+    \item We varied the size of the universe (B) and recorded the number of cache misses for each configuration.
+        \begin{multicols}{2}
+        \begin{itemize}
+            \item 256
+            \item 512
+            \item 1024
+            \item 2048
+            \item 4096
+            \item 8192
+            \item 16384
+        \end{itemize}
+    \end{multicols}
+    \item We repeated the experiments multiple times to ensure the consistency of the results.
+    \item We analyzed the results to compare the cache performance of Van Emde-Boas trees and binary search trees.
+    \item We generated tables and figures to summarize the results.
+    \item We interpreted the results to draw conclusions about the cache performance of the two data structures.
+\end{enumerate}
+
+\subsection{Results}
+The following tables and figures summarize the cache misses for different configurations of B.
+\begin{table}[h!]
+    \centering
+    {\small
+    \begin{tabular}{lrrrrrrrr}
+        \toprule
+        & & 256 & 512 & 1024 & 2048 & 4096 & 8192 & 16384 \\
+        \midrule
+        \multirow{5}{*}{VEB}
+        & Instruction cache misses & 586,338 & 656,874 & 747,164 & 944,139 & 1,298,782 & 1,923,825 & 3,138,048 \\
+        & Data cache read misses & 826,978 & 914,641 & 1,093,725 & 1,323,708 & 1,782,222 & 2,581,843 & 4,114,636 \\
+        & Last-level cache read misses & 342,641 & 362,002 & 465,148 & 563,046 & 784,288 & 1,136,228 & 1,839,706 \\
+        & Data cache write misses & 86,317 & 95,840 & 105,986 & 127,986 & 167,471 & 239,100 & 355,242 \\
+        & Last-level cache write misses & 48,242 & 50,590 & 53,554 & 60,146 & 71,901 & 91,876 & 130,123 \\
+        \midrule
+        \multirow{5}{*}{BST}
+        & Instruction cache misses & 486,541 & 493,182 & 503,951 & 525,072 & 565,804 & 648,061 & 812,394 \\
+        & Data cache read misses & 786,192 & 806,564 & 850,909 & 967,983 & 1,280,734 & 1,769,552 & 2,897,689 \\
+        & Last-level cache read misses & 333,316 & 336,076 & 340,758 & 352,443 & 463,768 & 614,714 & 1,007,555 \\
+        & Data cache write misses & 72,848 & 74,668 & 78,745 & 88,967 & 110,487 & 145,009 & 241,735 \\
+        & Last-level cache write misses & 40,881 & 41,268 & 42,107 & 43,857 & 47,511 & 55,565 & 72,183 \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Cache misses for VEB and BST}
+\end{table}
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\textwidth,
+            height=0.6\textwidth,
+            xlabel={Block Size},
+            ylabel={Cache Misses},
+            xtick={256, 512, 1024, 2048, 4096, 8192, 16384},
+            xticklabels={256, 512, 1024, 2048, 4096, 8192, 16384},
+            ymin=0,
+            ymajorgrids=true,
+            grid style=dashed,
+            cycle list name=color list,
+            enlarge x limits=0.15,
+            xticklabel style={rotate=45, anchor=east},
+            legend style={at={(0.5,-0.15)},anchor=north}
+        ]
+        \addplot+[mark=o, color=violet] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,InstructionCacheMisses
+            256,586338
+            512,656874
+            1024,747164
+            2048,944139
+            4096,1298782
+            8192,1923825
+            16384,3138048
+        };
+        \addplot+[mark=triangle*, color=violet] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,DataCacheReadMisses
+            256,826978
+            512,914641
+            1024,1093725
+            2048,1323708
+            4096,1782222
+            8192,2581843
+            16384,4114636
+        };
+        \addplot+[mark=square*, color=violet] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,LastLevelCacheReadMisses
+            256,342641
+            512,362002
+            1024,465148
+            2048,563046
+            4096,784288
+            8192,1136228
+            16384,1839706
+        };
+        \addplot+[mark=diamond*, color=violet] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,DataCacheWriteMisses
+            256,86317
+            512,95840
+            1024,105986
+            2048,127986
+            4096,167471
+            8192,239100
+            16384,355242
+        };
+        \addplot+[mark=x, color=violet] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,LastLevelCacheWriteMisses
+            256,48242
+            512,50590
+            1024,53554
+            2048,60146
+            4096,71901
+            8192,91876
+            16384,130123
+        };
+        \addplot+[mark=o, color=orange] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,InstructionCacheMisses
+            256,486541
+            512,493182
+            1024,503951
+            2048,525072
+            4096,565804
+            8192,648061
+            16384,812394
+        };
+        \addplot+[mark=triangle*, color=orange] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,DataCacheReadMisses
+            256,786192
+            512,806564
+            1024,850909
+            2048,967983
+            4096,1280734
+            8192,1769552
+            16384,2897689
+        };
+        \addplot+[mark=square*, color=orange] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,LastLevelCacheReadMisses
+            256,333316
+            512,336076
+            1024,340758
+            2048,352443
+            4096,463768
+            8192,614714
+            16384,1007555
+        };
+        \addplot+[mark=diamond*, color=orange] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,DataCacheWriteMisses
+            256,72848
+            512,74668
+            1024,78745
+            2048,88967
+            4096,110487
+            8192,145009
+            16384,241735
+        };
+        \addplot+[mark=x, color=orange] table[x index=0, y index=1, col sep=comma] {
+            BlockSize,LastLevelCacheWriteMisses
+            256,40881
+            512,41268
+            1024,42107
+            2048,43857
+            4096,47511
+            8192,55565
+            16384,72183
+        };
+        \legend{VEB Instruction Cache Misses,
+                VEB Data Cache Read Misses,
+                VEB Last-level Cache Read Misses,
+                VEB Data Cache Write Misses,
+                VEB Last-level Cache Write Misses,
+                BST Instruction Cache Misses,
+                BST Data Cache Read Misses,
+                BST Last-level Cache Read Misses,
+                BST Data Cache Write Misses,
+                BST Last-level Cache Write Misses}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Cache misses for VEB and BST}
+    \label{fig:cache_misses}
+\end{figure}
+
+\subsection{Time Analysis}
+The following plot shows the time taken for insert and search operations for Van Emde-Boas trees and binary search trees. The full code for generating this plot is provided in the appendix \ref{appendix:time_performance_plot}.
+\input{images/visualizations/time_performance_plot.tex}

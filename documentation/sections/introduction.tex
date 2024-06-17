@@ -1,0 +1,6 @@
+\section{Introduction}
+In this report, we explore Van Emde-Boas (vEB) trees and their efficiency in reducing cache memory misses during search operations compared to plain binary search trees (BSTs). The vEB tree is a sophisticated data structure that allows for extremely fast operations on a set of integers. This efficiency is achieved through a hierarchical structure that reduces the complexity of operations to $O(\log \log M)$, where $M$ is the size of the universe. In contrast, plain BSTs, which are simpler in design, offer $O(\log N)$ complexity for balanced trees, where $N$ is the number of elements.
+
+We aim to implement both data structures, measure their performance in terms of cache misses using a specialized tool, and compare the results across various configurations. Our hypothesis is that the hierarchical nature of vEB trees will result in fewer cache misses compared to plain BSTs.\\
+
+You can find all the code and documentation for this project on our GitHub repository: \textbf{\url{https://github.com/pierre-jezegou/van-emde-boas-tree}}.
