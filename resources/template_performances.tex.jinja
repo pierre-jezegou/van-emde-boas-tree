@@ -1,0 +1,49 @@
+\begin{figure}[h]
+\centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            title={Performance Comparison},
+            xlabel={Universe Size},
+            ylabel={Time (seconds)},
+            xmode=log,
+            ymode=log,
+            legend pos=outer north east,
+            grid=both,
+            minor grid style={gray!25},
+            major grid style={gray!25},
+            width=10cm,
+            height=10cm,
+        ]
+
+        \addplot coordinates {
+        {% for result in results %}
+            ({{ result.universe_size }}, {{ result.veb_insert_time }})
+        {% endfor %}
+        };
+        \addlegendentry{VEB Insert Time}
+
+        \addplot coordinates {
+        {% for result in results %}
+            ({{ result.universe_size }}, {{ result.veb_search_time }})
+        {% endfor %}
+        };
+        \addlegendentry{VEB Search Time}
+
+        \addplot coordinates {
+        {% for result in results %}
+            ({{ result.universe_size }}, {{ result.bst_insert_time }})
+        {% endfor %}
+        };
+        \addlegendentry{BST Insert Time}
+
+        \addplot coordinates {
+        {% for result in results %}
+            ({{ result.universe_size }}, {{ result.bst_search_time }})
+        {% endfor %}
+        };
+        \addlegendentry{BST Search Time}
+
+        \end{axis}
+    \end{tikzpicture}
+\caption{Time analysis}
+\end{figure}
