@@ -1,0 +1,27 @@
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \node[draw, rounded corners=2mm, inner sep = 0.2cm, fill=orange!0] { 
+        \begin{tikzpicture} 
+            \node[inner sep = 1mm] (title) { \Large{\bfseries {{ title }} }}; 
+            % \draw (title.south west) -- (title.south east);
+            \node[at=(title.south), anchor=north, inner sep=3mm, align=left, fill=green!30!black!10, yshift=-0.2cm] (attributes) {
+                \begin{minipage}{60mm}
+                    \textbf{Attributes}\\
+                    {{ attributes }}
+                \end{minipage} 
+                };
+            % \draw (attributes.north west) -- (attributes.north east);
+            \node[at=(attributes.south), anchor=north, inner sep=3mm, align=left, fill=blue!10, yshift=-0.2cm] (methods) {
+                \begin{minipage}{60mm}
+                    \textbf{Methods}\\
+                    {{ methods }}
+                \end{minipage} 
+                };
+            % \draw (methods.north west) -- (methods.north east);
+        \end{tikzpicture}
+        }; 
+    \end{tikzpicture}
+    \caption{Class description - {{ title }} }
+    \label{class:{{ title }}}
+\end{figure}
